@@ -1,2 +1,0 @@
-# LinuxShell
-test shell comands
