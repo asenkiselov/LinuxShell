@@ -1,0 +1,143 @@
+[
+    {
+      "id": "deploy",
+      "execute-command": "stack.sh",
+      "command-working-directory": "${ENV_WORKDIR}",
+      "trigger-rule":
+      {
+        "match":
+        {
+          "type": "value",
+          "value": "${TOKEN_HOOK}",
+          "parameter":
+          {
+            "source": "header",
+            "name": "X-Token"
+          }
+        }
+      },
+      "pass-arguments-to-command":
+      [
+        {
+          "source": "string",
+          "name": "deploy"
+        },
+        {
+          "source": "payload",
+          "name": "stack"
+        },
+        {
+          "source": "payload",
+          "name": "service"
+        },
+        {
+          "source": "payload",
+          "name": "imagetag"
+        }
+      ],
+      "include-command-output-in-response": true,
+      "include-command-output-in-response-on-error": true
+    },
+
+    {
+      "id": "check",
+      "execute-command": "stack.sh",
+      "command-working-directory": "${ENV_WORKDIR}",
+      "trigger-rule":
+      {
+        "match":
+        {
+          "type": "value",
+          "value": "${STACK_CHECK_HOOK}",
+          "parameter":
+          {
+            "source": "header",
+            "name": "X-Token"
+          }
+        }
+      },
+      "pass-arguments-to-command":
+      [
+        {
+          "source": "string",
+          "name": "check"
+        },
+        {
+          "source": "payload",
+          "name": "stack"
+        }
+      ],
+      "include-command-output-in-response": true,
+      "include-command-output-in-response-on-error": true
+    },
+
+    {
+      "id": "updaterepo",
+      "execute-command": "stack.sh",
+      "command-working-directory": "${ENV_WORKDIR}",
+      "trigger-rule":
+      {
+        "match":
+        {
+          "type": "value",
+          "value": "${CODE_TOKEN_HOOK}",
+          "parameter":
+          {
+            "source": "header",
+            "name": "X-Token"
+          }
+        }
+      },
+      "pass-arguments-to-command":
+      [
+        {
+          "source": "string",
+          "name": "updaterepo"
+        }
+      ],
+      "include-command-output-in-response": true,
+      "include-command-output-in-response-on-error": true
+
+    },
+
+    {
+      "id": "inspect",
+      "execute-command": "stack.sh",
+      "command-working-directory": "${ENV_WORKDIR}",
+      "trigger-rule":
+      {
+        "match":
+        {
+          "type": "value",
+          "value": "${TOKEN_HOOK}",
+          "parameter":
+          {
+            "source": "header",
+            "name": "X-Token"
+          }
+        }
+      },
+      "pass-arguments-to-command":
+      [
+        {
+          "source": "string",
+          "name": "inspect"
+        },
+        {
+          "source": "payload",
+          "name": "stack"
+        },
+        {
+          "source": "payload",
+          "name": "service"
+        },
+        {
+          "source": "payload",
+          "name": "filter"
+        }
+      ],
+      "include-command-output-in-response": true,
+      "include-command-output-in-response-on-error": true
+
+    }
+]
